@@ -1,0 +1,83 @@
+[
+  {
+    "id": 1,
+    "title": "Rose Print Maxi Dress",
+    "price": 59.99,
+    "description": "Elegant floral dress perfect for summer outings.",
+    "image": "/images/product1.jpg",
+    "category": "Dresses",
+    "sold": 60
+  },
+  {
+    "id": 2,
+    "title": "Casual Denim Jacket",
+    "price": 74.50,
+    "description": "Classic blue denim jacket with a comfortable fit.",
+    "image": "/images/product2.jpg",
+    "category": "Jackets",
+    "sold": 30
+  },
+  {
+    "id": 3,
+    "title": "High-Waist Skinny Jeans",
+    "price": 49.99,
+    "description": "Stretchy, high-rise jeans for everyday wear.",
+    "image": "/images/product3.jpg",
+    "category": "Pants",
+    "sold": 30
+  },
+  {
+    "id": 4,
+    "title": "White Cotton T-Shirt",
+    "price": 19.99,
+    "description": "Soft and breathable cotton T-shirt for casual use.",
+    "image": "/images/product4.jpg",
+    "category": "Tops",
+    "sold": 25
+  },
+  {
+    "id": 5,
+    "title": "Leather Handbag",
+    "price": 129.00,
+    "description": "Stylish handbag made from genuine leather.",
+    "image": "/images/product5.jpg",
+    "category": "Accessories",
+    "sold": 45
+  },
+  {
+    "id": 6,
+    "title": "Ankle Boots",
+    "price": 89.99,
+    "description": "Comfortable and stylish boots for cold seasons.",
+    "image": "/images/product6.jpg",
+    "category": "Footwear",
+    "sold": 90
+  },
+  {
+    "id": 7,
+    "title": "Silk Scarf",
+    "price": 34.99,
+    "description": "Luxurious silk scarf with rose print design.",
+    "image": "/images/product7.jpg",
+    "category": "Accessories",
+    "sold": 110
+  },
+  {
+    "id": 8,
+    "title": "Workout Leggings",
+    "price": 39.99,
+    "description": "Stretchy leggings suitable for fitness and yoga.",
+    "image": "/images/product8.jpg",
+    "category": "Activewear",
+    "sold": 28
+  },
+  {
+    "id": 9,
+    "title": "Oversized Hoodie",
+    "price": 54.99,
+    "description": "Warm oversized hoodie made from soft fleece.",
+    "image": "/images/product9.jpg",
+    "category": "Sweaters",
+    "sold": 20
+  }
+]
