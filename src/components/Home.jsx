@@ -1,27 +1,46 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import lunaImage from '/image/luna.png'
 
 //IMPORT DATA CATEGORIES & PRODUCTS INSTEAD OF API
-import categories from '../data/cats.json';
-import products from '../data/products.json';
+import { ProductsContext } from '../context/ProductContext';
 
 //IMPORT SWIPER COMPONENTS
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import axios from 'axios';
 
 
 const Home = () => {
-
-  //MAKE BEST SELLING FUNCTION
+  const { products, loadingInProducts } = useContext(ProductsContext);
+  const [categories, setCategories] = useState([]);
+  const [loadingOnCategories, setLoadingOnCategories] = useState([]);
+  
+  // MAKE BEST SELLING FUNCTION
   const bestSelling = [...products]
-  .sort(( a, b ) => b.sold - a.sold)
+  .sort(( a, b ) => a.stock - b.stock)
   .slice( 0, 6 );
+
+  const getWomenCategories = async () => {
+    try {
+      const res = await axios.get('https://dummyjson.com/products/categories');
+      console.log(res.data);
+      setCategories(res.data);
+    } catch (error) {
+      console.error('Error fetching categories:', error.message);      
+    } finally {
+      setLoadingOnCategories(false);
+    }
+  };
+  
+  useEffect(() => {
+    getWomenCategories();
+  }, []);
 
   return (
     <>
     {/* BANNER */}
-      <div className='w-full h-[100vh] bg-hero bg-cover text-rose-600 lg:-translate-y-4 bg-center flex flex-col items-center justify-center lg:justify-end' style={{ backgroundImage: `url(${lunaImage})`}}>
+      <div className='w-full h-[100vh] bg-hero bg-cover text-rose-600 bg-center flex flex-col items-center justify-center lg:justify-end' style={{ backgroundImage: `url(${lunaImage})`}}>
         <h2 className='text-3xl lg:-translate-y-20'>Browse the Collection</h2>
         <Link to='/products' className='border border-white p-4 mt-6 lg:-translate-y-20 hover:font-bold box-border'>Show all</Link>
       </div> 
@@ -48,12 +67,16 @@ const Home = () => {
           pagination={{ clickable: false }}
           navigation
         >
-          {categories.map((cat) => (
-            <SwiperSlide key={cat.id}>
-              <img src={cat.image} alt={cat.name} width={900} className=' h-[30vh]' />
-              <h3 className='font-semibold text-lg'>{cat.name}</h3>
+          {loadingOnCategories ? (
+            <p>Loading...</p>
+          ) : (
+            categories.map((cat) => (
+            <SwiperSlide key={cat.slug}>
+              {/* <img src={cat.images[2]} alt={cat.name} width={900} className=' h-[30vh]' /> */}
+              <h3 className='font-semibold text-lg text-center'>{cat.name}</h3>
             </SwiperSlide>
-          ))}
+            ))
+          )}
         </Swiper>
       </div>
 
@@ -80,18 +103,28 @@ const Home = () => {
           pagination={{ clickable: false }}
           navigation
         >
-          {bestSelling.map((product) => (
-            <SwiperSlide key={product.id}>
-              <img src={product.image} alt={product.title} width={800} className=' h-[40vh]' />
-              <h2 className="text-lg font-bold">{product.title}</h2>
-              <p>Price: ${product.price}</p>
-              <p>Sold: {product.sold}</p>
-            </SwiperSlide>
-          ))}
+          {loadingInProducts ? (
+            <p>Loading...</p>
+          ) : (
+            bestSelling.map((cat) => (
+              <SwiperSlide key={cat.id} className='text-center'>
+                <Link
+                 to={`/product/${cat.id}`}
+                 
+                 >
+                  <img src={cat.images[0]} alt={cat.title} width={800} className=' h-[40vh]' />
+                  <h2 className="text-lg font-bold">{cat.title}</h2>
+                  <p>Price: ${cat.price}</p>
+                  <p className='text-red-600 absolute z-9 top-0 font-bold'> {cat.stock > 0 ? '' : 'Sold Out'}</p>
+                </Link>
+              </SwiperSlide>
+            )) 
+          )}
+          
         </Swiper>
       </div>
     </>
   )
 }
 
-export default Home
+export default Home 
