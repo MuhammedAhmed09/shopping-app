@@ -41,8 +41,9 @@ const ProductDetails = () => {
         <p className='text-center'>Loading...</p>
       ) : (
         product && (
-          <div key={product.id} className='my-8 lg:px-10 md:px-8 sm:px-4 flex'>
-            <div className=' w-full flex '>
+          <div key={product.id} className='my-8 p-2 lg:px-10 md:px-8 sm:px-4 flex flex-col md:flex-row'>
+
+            <div className='w-full flex '>
               <img 
                 alt={product.title}
                 src={product.images[0]}
@@ -50,6 +51,7 @@ const ProductDetails = () => {
                 className='w-fit h-2/4 bg-cover'
               />
             </div>
+
             <div className=' flex-2/3'>
               <p className='text-black/50 text-sm'>LUNA</p>
               <h1 className='text-5xl my-4'>{product.title}</h1>
@@ -79,6 +81,7 @@ const ProductDetails = () => {
               <p className='text-black/50 font-semibold mt-8 text-xl'>{product.description}</p>
             </div>
           </div>
+
         )
       )}
     </div>
