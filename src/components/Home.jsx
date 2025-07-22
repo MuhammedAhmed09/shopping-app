@@ -10,11 +10,34 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import axios from 'axios';
 
+// IMAGES FOR CATEGORIES
+const categoryImages = {
+  smartphones: "https://cdn.dummyjson.com/product-images/1/1.jpg",
+  laptops: "https://cdn.dummyjson.com/product-images/6/1.png",
+  fragrances: "https://cdn.dummyjson.com/product-images/11/1.jpg",
+  skincare: "https://cdn.dummyjson.com/product-images/16/1.png",
+  groceries: "https://cdn.dummyjson.com/product-images/21/1.png",
+  'home-decoration': "https://cdn.dummyjson.com/product-images/26/1.jpg",
+  furniture: "https://cdn.dummyjson.com/product-images/30/1.jpg",
+  tops: "https://cdn.dummyjson.com/product-images/36/1.jpg",
+  'womens-dresses': "https://cdn.dummyjson.com/product-images/38/1.jpg",
+  'womens-shoes': "https://cdn.dummyjson.com/product-images/44/1.jpg",
+  'mens-shirts': "https://cdn.dummyjson.com/product-images/50/1.jpg",
+  'mens-shoes': "https://cdn.dummyjson.com/product-images/57/1.jpg",
+  'mens-watches': "https://cdn.dummyjson.com/product-images/61/1.jpg",
+  'womens-watches': "https://cdn.dummyjson.com/product-images/66/1.jpg",
+  'womens-bags': "https://cdn.dummyjson.com/product-images/71/1.jpg",
+  'womens-jewellery': "https://cdn.dummyjson.com/product-images/76/1.jpg",
+  sunglasses: "https://cdn.dummyjson.com/product-images/81/1.jpg",
+  automotive: "https://cdn.dummyjson.com/product-images/86/1.jpg",
+  motorcycle: "https://cdn.dummyjson.com/product-images/91/1.jpg",
+  lighting: "https://cdn.dummyjson.com/product-images/96/1.jpg",
+};
 
 const Home = () => {
   const { products, loadingInProducts } = useContext(ProductsContext);
   const [categories, setCategories] = useState([]);
-  const [loadingOnCategories, setLoadingOnCategories] = useState([]);
+  const [loadingOnCategories, setLoadingOnCategories] = useState(true);
   
   // MAKE BEST SELLING FUNCTION
   const bestSelling = [...products]
@@ -24,7 +47,6 @@ const Home = () => {
   const getWomenCategories = async () => {
     try {
       const res = await axios.get('https://dummyjson.com/products/categories');
-      console.log(res.data);
       setCategories(res.data);
     } catch (error) {
       console.error('Error fetching categories:', error.message);      
@@ -50,18 +72,10 @@ const Home = () => {
         <Swiper 
           spaceBetween={3}
           breakpoints={{
-            0: {
-              slidesPerView: 2
-            },
-            640: {
-              slidesPerView: 3
-            },
-            1024: {
-              slidesPerView: 6
-            },
-            2048: {
-              slidesPerView: 8
-            }
+            0: { slidesPerView: 2 },
+            640: { slidesPerView: 3 },
+            1024: { slidesPerView: 6 },
+            2048: { slidesPerView: 8 }
           }}
           autoplay={{ delay: 5000 }}
           pagination={{ clickable: false }}
@@ -70,10 +84,18 @@ const Home = () => {
           {loadingOnCategories ? (
             <p>Loading...</p>
           ) : (
-            categories.map((cat) => (
-            <SwiperSlide key={cat.slug}>
-              {/* <img src={cat.images[2]} alt={cat.name} width={900} className=' h-[30vh]' /> */}
-              <h3 className='font-semibold text-lg text-center'>{cat.name}</h3>
+            categories.map((cat, index) => (
+            <SwiperSlide key={index}>
+              <Link to={`/collections/${cat.slug}`}>
+                <div
+                  className='h-[30vh] w-full bg-cover bg-center rounded-xl flex text-center items-center justify-center text-white text-xl font-bold hover:scale-105 transition'
+                  style={{  backgroundImage: `url(${categoryImages[cat.slug] || 'https://via.placeholder.com/300x200?text=No+Image'})` }}
+                >
+                  <div className='bg-black/50 px-4 py-2 rounded'>
+                    {cat.name.replace(/-/g, ' ')}
+                  </div>
+                </div>
+              </Link>
             </SwiperSlide>
             ))
           )}

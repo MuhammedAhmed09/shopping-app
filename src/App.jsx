@@ -16,6 +16,7 @@ import Account from './pages/Account';
 import Cart from './pages/Cart';
 import Products from './pages/Products'
 import ProductDetails from './pages/ProductDetails'
+import CollectionBrand from './pages/CollectionBrand'
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
         <Route path='cart' element={<Cart />} />
         <Route path='products' element={<Products />} />
         <Route path='product/:id' element={<ProductDetails />} />
+        <Route path='collections/:categoryName' element={<CollectionBrand />} />
       </Routes>
     </CategoriesProvider>
   )

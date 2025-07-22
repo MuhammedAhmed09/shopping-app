@@ -22,7 +22,6 @@ const ProductsProvider = ({ children }) => {
                 )
             );
             const allProducts = response.flatMap((res) => res.data.products);
-            console.log(allProducts);
             setProducts(allProducts)
 
         }catch (error) {
