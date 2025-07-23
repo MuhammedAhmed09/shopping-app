@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { FaMinus, FaPlus } from 'react-icons/fa';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const ProductDetails = () => {
   const {id} = useParams();
@@ -12,7 +13,6 @@ const ProductDetails = () => {
   const getProductById = async () => {
     try {
       const res = await axios.get(`https://dummyjson.com/products/${id}`);
-      console.log(res.data);
       setProduct(res.data);
 
     } catch (error) {
@@ -31,7 +31,7 @@ const ProductDetails = () => {
   }
 
   const handleIncreaseClick = () => {
-    setQuantity(quantity + 1)
+    setQuantity(Number(quantity) + 1)
   }
   
 
@@ -41,24 +41,32 @@ const ProductDetails = () => {
         <p className='text-center'>Loading...</p>
       ) : (
         product && (
-          <div key={product.id} className='my-8 p-2 lg:px-10 md:px-8 sm:px-4 flex flex-col md:flex-row'>
+          <div key={product.id} className='max-w-7xl mx-auto flex flex-col md:flex-row gap-10 bg-white rounded-2xl shadow-lg p-6'>
 
-            <div className='w-full flex '>
-              <img 
-                alt={product.title}
-                src={product.images[0]}
-                loading="lazy"
-                className='w-fit h-2/4 bg-cover'
-              />
+            <div className="md:w-1/2 w-full rounded-xl overflow-hidden">
+              <Swiper
+                slidesPerView={1}
+              >
+                {product.images.map((img, index) => (
+                  <SwiperSlide className='w-fit bg-cover' key={index}>
+                    <img 
+                      alt={product.title}
+                      src={img}
+                      loading="lazy"
+                      className="w-full h-[400px] object-cover rounded-xl"
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
 
-            <div className=' flex-2/3'>
+            <div className='w-full'>
               <p className='text-black/50 text-sm'>LUNA</p>
               <h1 className='text-5xl my-4'>{product.title}</h1>
               <div className='flex items-center gap-10 my-4'>
 
                 <h3 className='text-xl text-black/80'>LE {product.price} USA</h3>
-                {product.stock < 1 && <p className='rounded-3xl bg-red-600 text-white font-semibold py-1 px-3'>'Sold out'</p>}
+                {product.stock < 1 && <p className='rounded-3xl bg-red-600 text-white font-semibold py-1 px-3'>Sold out</p>}
               
               </div>
               {/* QUANTITY BTN */}
@@ -66,18 +74,35 @@ const ProductDetails = () => {
                 <p className='text-black/80'>Quantity</p>
                 <div className='border w-40 h-14 my-2 flex flex-row overflow-hidden '>
 
-                  <button className='w-2/3 justify-items-center disabled:text-black/40' onClick={handleDecreaseClick} disabled={quantity <= 1}><FaMinus /></button>
+                  <button className='w-2/3 justify-items-center disabled:text-black/40 disabled:cursor-default cursor-pointer' onClick={handleDecreaseClick} disabled={quantity <= 1}><FaMinus /></button>
                   <input 
                     type="number" 
+                    min="1"
                     value={quantity} 
                     onChange={(e) => setQuantity(e.target.value)}
                     className='text-center items-center w-full'
                   />
-                  <button className='w-2/3 justify-items-center' onClick={handleIncreaseClick}><FaPlus /></button>
+                  <button className='w-2/3 justify-items-center cursor-pointer' onClick={handleIncreaseClick}><FaPlus /></button>
 
                 </div>
-
               </div>
+              <div className='felx flex-col lg:flex-row'>
+                <div>
+                  {product.stock < 1 ? (
+                    <button disabled className='disabled:text-black/40 disabled:cursor-default items-center justify-center border min-w-40 w-full max-w-96 h-14 my-2 flex flex-row overflow-hidden '>
+                      Sold Out
+                    </button>
+                  ) : (
+                  <button className='items-center justify-center border min-w-40 w-full max-w-96 h-14 my-2 flex flex-row overflow-hidden cursor-pointer'>
+                    Add to cart
+                  </button>
+                )}
+                </div>
+                <div>
+                  {product.stock >= 1 && (<button className='items-center justify-center border min-w-40 w-full max-w-96 h-14 my-2 flex flex-row overflow-hidden cursor-pointer'>But it now</button>)}
+                </div>
+              </div>
+
               <p className='text-black/50 font-semibold mt-8 text-xl'>{product.description}</p>
             </div>
           </div>
