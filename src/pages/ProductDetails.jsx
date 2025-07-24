@@ -1,14 +1,17 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { CartContext } from '../context/CartPageContext';
 
 const ProductDetails = () => {
   const {id} = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
+
+  const { addToCart } = useContext(CartContext)
 
   const getProductById = async () => {
     try {
@@ -24,6 +27,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     getProductById();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleDecreaseClick = () => {
@@ -73,7 +77,6 @@ const ProductDetails = () => {
               <div className='my-4'>
                 <p className='text-black/80'>Quantity</p>
                 <div className='border w-40 h-14 my-2 flex flex-row overflow-hidden '>
-
                   <button className='w-2/3 justify-items-center disabled:text-black/40 disabled:cursor-default cursor-pointer' onClick={handleDecreaseClick} disabled={quantity <= 1}><FaMinus /></button>
                   <input 
                     type="number" 
@@ -83,7 +86,6 @@ const ProductDetails = () => {
                     className='text-center items-center w-full'
                   />
                   <button className='w-2/3 justify-items-center cursor-pointer' onClick={handleIncreaseClick}><FaPlus /></button>
-
                 </div>
               </div>
               <div className='felx flex-col lg:flex-row'>
@@ -93,7 +95,10 @@ const ProductDetails = () => {
                       Sold Out
                     </button>
                   ) : (
-                  <button className='items-center justify-center border min-w-40 w-full max-w-96 h-14 my-2 flex flex-row overflow-hidden cursor-pointer'>
+                  <button
+                    onClick={() => addToCart({ ...product, quantity })}
+                    className='items-center justify-center border min-w-40 w-full max-w-96 h-14 my-2 flex flex-row overflow-hidden cursor-pointer'
+                  >
                     Add to cart
                   </button>
                 )}
