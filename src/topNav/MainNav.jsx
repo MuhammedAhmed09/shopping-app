@@ -23,7 +23,7 @@ const MainNav = () => {
     
 
   return (
-    <nav className='py-20 px-[10%] flex border-b border-rose-200 items-center justify-between relative'>
+    <nav className='py-18 px-[10%] flex border-b border-rose-200 items-center justify-between relative'>
         <div className='flex justify-between w-7/12 flex-row-reverse lg:justify-start lg:w-10/12 lg:flex-row items-center'>
             
             <Link to='/' className='font-bold text-3xl text-rose-600'>LUNA</Link>
