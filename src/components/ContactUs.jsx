@@ -2,7 +2,7 @@ import React from 'react'
 
 const ContactUs = () => {
   return (
-    <div className='w-full flex flex-col my-10 px-5 md:px-22 lg:px-[20%]'>
+    <div className='w-full flex flex-col my-10 px-5 md:px-22 lg:px-[20%] pt-[calc(14rem)]'>
       <div className='items-center text-center'>
         <h3 className='font-bold text-3xl'>
           For exchange contact us on social media platforms.
@@ -33,10 +33,10 @@ const ContactUs = () => {
           />
         </div>
         <div>
-          <textarea name="comment" placeholder='Comment' className='border w-full p-3 hover:border-gray-400 hover:border-2 '/>
+          <textarea name="comment" placeholder='Comment' className='border w-full p-3 hover:border-gray-400 transform hover:border-2 '/>
         </div>
 
-        <button type='submit' className='self-start bg-black text-white text-lg px-12 py-3 hover:px-13 cursor-pointer'>Send</button>
+        <button type='submit' className='self-start bg-black text-white text-lg px-12 py-3 transition-transform duration-500 transform hover:scale-105 cursor-pointer'>Send</button>
       </form>
 
     </div>

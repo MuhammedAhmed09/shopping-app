@@ -11,7 +11,7 @@ const Cart = () => {
   }, 0);
 
   return (
-    <div className='my-8 lg:px-10 md:px-8 sm:px-4'>
+    <div className='my-8 lg:px-10 md:px-8 sm:px-4 pt-[calc(14rem)]'>
       {cartItems?.length > 0 ? (
         <>
           <div className='flex justify-between items-center'>

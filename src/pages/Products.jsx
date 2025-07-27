@@ -5,7 +5,7 @@ import { ProductsContext } from '../context/ProductContext';
 const Products = () => {
  const { products, loadingInProducts } = useContext(ProductsContext);
   return (
-    <section className='flex flex-col px-[10%]'>
+    <section className='flex flex-col px-[10%] pt-[calc(14rem)]'>
       <nav className='my-10'>
         <h3 className='text-2xl font-semibold'>Availability & Price Sort (Coming Soon)</h3>
       </nav>

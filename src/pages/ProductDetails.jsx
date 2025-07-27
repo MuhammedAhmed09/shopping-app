@@ -40,7 +40,7 @@ const ProductDetails = () => {
   
 
   return (
-    <div>
+    <div className=' pt-[calc(14rem)]'>
       {loading ? (
         <p className='text-center'>Loading...</p>
       ) : (

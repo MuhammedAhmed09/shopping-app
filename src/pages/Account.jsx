@@ -2,8 +2,8 @@ import React from 'react'
 
 const Account = () => {
   return (
-    <div className='bg-gray-100 w-full h-[100vh]  items-center flex justify-center'>
-      <div className='bg-white p-12 flex flex-col rounded-2xl shadow-xl'>
+    <div className='bg-gray-100 w-full h-[100vh] pt-[calc(14rem)] items-center flex justify-center '>
+      <div className='bg-white p-12 flex flex-col rounded-2xl shadow-xl m-2'>
         <h3 className='text-2xl self-center mb-3'>LUNA</h3>
         <h3 className='text-2xl font-semibold my-2'>Sign in</h3>
         <p className='text-black/70 text-sm'>

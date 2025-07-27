@@ -37,11 +37,11 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <div className=' pt-[calc(14rem)]'>
     {/* BANNER */}
       <div className='w-full h-[100vh] bg-hero bg-cover text-rose-600 bg-center flex flex-col items-center justify-center lg:justify-end' style={{ backgroundImage: `url(${lunaImage})`}}>
         <h2 className='text-3xl lg:-translate-y-20'>Browse the Collection</h2>
-        <Link to='/products' className='border border-white p-4 mt-6 lg:-translate-y-20 hover:font-bold box-border'>Show all</Link>
+        <Link to='/products' className='border transition-transform duration-500 transform hover:scale-105 border-rose-300 p-4 mt-6 lg:-translate-y-20 box-border'>Show all</Link>
       </div> 
 
     {/* CATEGORIES */}
@@ -121,7 +121,7 @@ const Home = () => {
           
         </Swiper>
       </div>
-    </>
+    </div>
   )
 }
 
