@@ -13,11 +13,11 @@ const CartProvider = ({ children }) => {
             if(existing) {
                 return prevItems.map((item) => 
                 item.id === product.id 
-                    ? {...item, quantity: item.quantity + product.quantity} 
+                    ? {...item, quantity: item.quantity + (product.quantity || 1)} 
                     : item
                 )
             } else {
-                return [...prevItems, product]
+                return [...prevItems, { ...product, quantity: product.quantity || 1 }]
             }
         }) 
     };
@@ -61,8 +61,12 @@ const CartProvider = ({ children }) => {
         )
     }
 
+    const quantityInCart = () => {
+        return cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    }
+
     return (
-        <CartContext.Provider value={ {cartItems, addToCart, increaseQuantity, decreaseQuantity, updateQuantity, removeItem }}>
+        <CartContext.Provider value={{ cartItems, addToCart, increaseQuantity, decreaseQuantity, updateQuantity, removeItem, quantityInCart }}>
             {children}
         </CartContext.Provider>
     )

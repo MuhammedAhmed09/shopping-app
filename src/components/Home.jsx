@@ -39,9 +39,9 @@ const Home = () => {
   return (
     <div className=' pt-[calc(14rem)]'>
     {/* BANNER */}
-      <div className='w-full h-[100vh] bg-hero bg-cover text-rose-600 bg-center flex flex-col items-center justify-center lg:justify-end' style={{ backgroundImage: `url(${lunaImage})`}}>
+      <div className='w-full h-[100vh] bg-hero bg-cover text-primary bg-center flex flex-col items-center justify-center lg:justify-end' style={{ backgroundImage: `url(${lunaImage})`}}>
         <h2 className='text-3xl lg:-translate-y-20'>Browse the Collection</h2>
-        <Link to='/products' className='border transition-transform duration-500 transform hover:scale-105 border-rose-300 p-4 mt-6 lg:-translate-y-20 box-border'>Show all</Link>
+        <Link to='/products' className='border transition-transform duration-500 transform hover:scale-105 border-primary-border p-4 mt-6 lg:-translate-y-20 box-border'>Show all</Link>
       </div> 
 
     {/* CATEGORIES */}
@@ -110,10 +110,10 @@ const Home = () => {
                  to={`/product/${cat.id}`}
                  
                  >
-                  <img src={cat.images[0]} alt={cat.title} width={800} className=' h-[40vh]' />
+                  <img src={cat.images[0]} alt={cat.title} width={800} className='h-[40vh] duration-500 hover:scale-105' />
                   <h2 className="text-lg font-bold">{cat.title}</h2>
-                  <p>Price: ${cat.price}</p>
-                  <p className='text-red-600 absolute z-9 top-0 font-bold'> {cat.stock > 0 ? '' : 'Sold Out'}</p>
+                  <p>Price: LE {Math.round(cat.price)}</p>
+                  <p className='text-primary absolute z-9 top-0 font-bold'> {cat.stock > 0 ? '' : 'Sold Out'}</p>
                 </Link>
               </SwiperSlide>
             )) 

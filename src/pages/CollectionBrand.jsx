@@ -22,6 +22,7 @@ const CollectionBrand = () => {
 
     useEffect(() => {
         fetchProductsByCategory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [categoryName]);
     
   return (
@@ -38,12 +39,16 @@ const CollectionBrand = () => {
             {products.map((product) => (
                 <Link
                     key={product.id}
-                    className='border border-rose-100 p-2 rounded hover:shadow-lg transition shadow'
+                    className='border border-primary-border/30 p-2 rounded hover:shadow-lg transition shadow'
                     to={`/product/${product.id}`}
                 > 
-                    <img src={product.thumbnail} alt={product.title} className='h-[40vh] w-full object-cover rounded mb-2' />
+                    <img 
+                        src={product.thumbnail} 
+                        alt={product.title} 
+                        className='h-[40vh] w-full object-cover rounded mb-2 hover:scale-105 duration-300' 
+                    />
                     <h2 className="text-lg font-bold">{product.title}</h2>
-                    <p>Price: ${product.price}</p>
+                    <p>Price: LE {Math.round(product.price)}</p>
                 </Link>
             ))}
             </div>

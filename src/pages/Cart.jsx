@@ -5,7 +5,7 @@ import QuantityControl from './QuantityControl';
 
 const Cart = () => {
   const { cartItems } = useContext(CartContext);
-
+  
   const totalPrice = cartItems.reduce((acc, item) => {
     return acc + item.price * item.quantity;
   }, 0);
@@ -15,11 +15,11 @@ const Cart = () => {
       {cartItems?.length > 0 ? (
         <>
           <div className='flex justify-between items-center'>
-            <h1 className='font-bold text-4xl md:text-5xl md:font-semibold lg:text-6xl'>Your cart</h1>
-            <Link to='/products' className='hover:border-b border-rose-500 text-lg font-semibold'>Continue shopping</Link>
+            <h1 className='font-bold text-4xl md:text-5xl md:font-semibold lg:text-6xl my-6'>Your cart</h1>
+            <Link to='/products' className='hover:border-b border-primary-border text-lg font-semibold'>Continue shopping</Link>
           </div>
 
-          <ul className='flex mx-auto border-b border-rose-200 py-4 text-rose-400'>
+          <ul className='flex mx-auto border-b border-primary-border/40 py-4 text-primary/80'>
             <li className='flex-2/4'>Product</li>
             <li className='md:flex-1/4 md:flex hidden'>Quantity</li>
             <li className=' min-w-32'>Total</li>
@@ -32,7 +32,7 @@ const Cart = () => {
                 <img src={item.images[0]} alt={item.title} className='w-32' />
                 <div>
                   <p className='font-bold text-lg'>{item.title}</p>
-                  <p>Price: ${item.price}</p>
+                  <p>Price: ${Math.round(item.price)}</p>
                 </div>
               </div>
 
@@ -43,7 +43,7 @@ const Cart = () => {
 
               <div>
                 <p className='font-semibold min-w-32'>
-                  LE {item.price * item.quantity}
+                  LE {Math.round(item.price * item.quantity)}
                 </p>
               </div>
             </div>
@@ -54,11 +54,11 @@ const Cart = () => {
             </div>
           </div>
           ))} 
-          <div className='border-t border-rose-200 py-8 justify-end flex'>
+          <div className='border-t border-primary-border/40 py-8 justify-end flex'>
             <div>
               <div className='flex gap-8 items-center py-2'> 
                 <h3 className='md:text-3xl text-2xl'>Estimated total</h3>
-                <h3 className='md:text-2xl text-xl'>LE {totalPrice}</h3>
+                <h3 className='md:text-2xl text-xl'>LE {Math.round(totalPrice)}</h3>
               </div>
               <p>Taxes, discounts and shipping calculated at checkout.</p>
               <button 
@@ -72,7 +72,7 @@ const Cart = () => {
       ) : (
         <div className='flex flex-col place-items-center gap-8'>
           <h1 className=' text-6xl'>Your cart is empty</h1>
-          <Link to='/products' className=' bg-rose-600 text-rose-50 font-semibold text-lg px-10 py-5'>Continue shopping</Link>
+          <Link to='/products' className=' bg-primary text-white font-semibold text-lg px-10 py-5 hover:scale-105 duration-300'>Continue shopping</Link>
         </div>
       )}
     </div>

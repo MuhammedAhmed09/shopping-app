@@ -31,7 +31,7 @@ const QuantityControl = ({ item }) => {
     </div>
     <div>
         <p 
-            className='text-3xl text-rose-600/50 cursor-pointer'
+            className='text-3xl text-primary/50 cursor-pointer'
             onClick={() => removeItem(item.id)} 
         >
             <MdOutlineDeleteOutline />

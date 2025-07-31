@@ -18,13 +18,12 @@ const Products = () => {
             {products.map((product) => (
               <Link
                key={product.id}
-               className='border border-rose-100 p-2 rounded hover:shadow-lg transition shadow'
+               className='border border-primary-border p-2 rounded hover:shadow-lg transition shadow'
                to={`/product/${product.id}`}
                > 
                 <img src={product.images[0]} alt={product.title} className='h-[40vh] w-full object-cover rounded mb-2' />
                 <h2 className="text-lg font-bold">{product.title}</h2>
-                <p>Price: ${product.price}</p>
-                <p>In Stock: {product.stock}</p>
+                <p>Price: ${Math.round(product.price)}</p>
               </Link>
             ))}
           </div>

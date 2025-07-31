@@ -4,6 +4,7 @@ import { FaMinus, FaPlus } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { CartContext } from '../context/CartPageContext';
+import { ToastContext } from '../context/TaosterContext';
 
 const ProductDetails = () => {
   const {id} = useParams();
@@ -11,7 +12,8 @@ const ProductDetails = () => {
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
 
-  const { addToCart } = useContext(CartContext)
+  const { addToCart } = useContext(CartContext);
+  const { addToCartToast } = useContext(ToastContext);
 
   const getProductById = async () => {
     try {
@@ -69,7 +71,7 @@ const ProductDetails = () => {
               <h1 className='text-5xl my-4'>{product.title}</h1>
               <div className='flex items-center gap-10 my-4'>
 
-                <h3 className='text-xl text-black/80'>LE {product.price} USA</h3>
+                <h3 className='text-xl text-black/80'>LE {Math.round(product.price)} USA</h3>
                 {product.stock < 1 && <p className='rounded-3xl bg-red-600 text-white font-semibold py-1 px-3'>Sold out</p>}
               
               </div>
@@ -96,7 +98,10 @@ const ProductDetails = () => {
                     </button>
                   ) : (
                   <button
-                    onClick={() => addToCart({ ...product, quantity })}
+                    onClick={() => {
+                      addToCart({ ...product, quantity }),
+                      addToCartToast()
+                    }}
                     className='items-center justify-center border min-w-40 w-full max-w-96 h-14 my-2 flex flex-row overflow-hidden cursor-pointer'
                   >
                     Add to cart
