@@ -2,9 +2,11 @@ import React, { useContext } from 'react'
 import { CartContext } from '../context/CartPageContext';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
+import { ToastContext } from '../context/TaosterContext';
 
 const QuantityControl = ({ item }) => {
     const { decreaseQuantity, updateQuantity, increaseQuantity, removeItem } = useContext(CartContext);
+    const { deleteFromCartToast } = useContext(ToastContext);
 
   return (
     <div className='flex items-center gap-4'>
@@ -32,7 +34,12 @@ const QuantityControl = ({ item }) => {
     <div>
         <p 
             className='text-3xl text-primary/50 cursor-pointer'
-            onClick={() => removeItem(item.id)} 
+            onClick={ 
+                () => {
+                    removeItem(item.id),
+                    deleteFromCartToast()
+                }
+            } 
         >
             <MdOutlineDeleteOutline />
         </p>

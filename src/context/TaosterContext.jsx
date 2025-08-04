@@ -6,9 +6,10 @@ export const ToastContext = createContext();
 
 const ToastProvider = ({ children }) => {
     const addToCartToast = () => toast('Added successfully');
+    const deleteFromCartToast = () => toast('Deleted successfully');
 
     return(
-        <ToastContext.Provider value={{ addToCartToast }}>
+        <ToastContext.Provider value={{ addToCartToast, deleteFromCartToast }}>
             {children}
         </ToastContext.Provider>
     )
