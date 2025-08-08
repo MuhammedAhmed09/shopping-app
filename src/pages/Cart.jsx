@@ -54,7 +54,7 @@ const Cart = () => {
             </div>
           </div>
           ))} 
-          <div className='border-t border-primary-border/40 py-8 justify-end flex'>
+          <div className='border-t border-primary-border/40 py-8 md:justify-end justify-center flex'>
             <div>
               <div className='flex gap-8 items-center py-2'> 
                 <h3 className='md:text-3xl text-2xl'>Estimated total</h3>

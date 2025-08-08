@@ -37,7 +37,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className=' pt-[calc(14rem)]'>
+    <div className='pt-[calc(14rem)]'>
     {/* BANNER */}
       <div className='w-full h-[100vh] bg-hero bg-cover text-primary bg-center flex flex-col items-center justify-center lg:justify-end' style={{ backgroundImage: `url(${lunaImage})`}}>
         <h2 className='text-3xl lg:-translate-y-20'>Browse the Collection</h2>
