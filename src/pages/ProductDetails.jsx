@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { CartContext } from '../context/CartPageContext';
 import { ToastContext } from '../context/TaosterContext';
+import LoaderPage from './LoaderPage';
 
 const ProductDetails = () => {
   const {id} = useParams();
@@ -44,7 +45,7 @@ const ProductDetails = () => {
   return (
     <div className=' pt-[calc(14rem)]'>
       {loading ? (
-        <p className='text-center'>Loading...</p>
+        <p className='text-center'><LoaderPage /></p>
       ) : (
         product && (
           <div key={product.id} className='max-w-7xl mx-auto flex flex-col md:flex-row gap-10 bg-white rounded-2xl shadow-lg p-6'>

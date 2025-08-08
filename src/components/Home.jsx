@@ -9,6 +9,7 @@ import { ProductsContext } from '../context/ProductContext';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import axios from 'axios';
+import LoaderPage from '../pages/LoaderPage';
 
 
 const Home = () => {
@@ -59,7 +60,7 @@ const Home = () => {
           navigation
         >
           {loadingOnCategories ? (
-            <p>Loading...</p>
+            <p><LoaderPage /></p>
           ) : (
             categories.map((cat, index) => (
             <SwiperSlide key={index}>

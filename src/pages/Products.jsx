@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ProductsContext } from '../context/ProductContext';
+import LoaderPage from './LoaderPage';
 
 const Products = () => {
  const { products, loadingInProducts } = useContext(ProductsContext);
@@ -12,7 +13,7 @@ const Products = () => {
 
       <section>
         {loadingInProducts ? (
-          <p className='text-center'>Loading...</p>
+          <p className='text-center'><LoaderPage /></p>
         ) : (
           <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
             {products.map((product) => (

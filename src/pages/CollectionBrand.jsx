@@ -1,6 +1,7 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import LoaderPage from './LoaderPage';
 
 const CollectionBrand = () => {
     const { categoryName } = useParams();
@@ -33,7 +34,7 @@ const CollectionBrand = () => {
 
         <section>
         {loading ? (
-            <p className='text-center'>Loading...</p>
+            <p className='text-center'><LoaderPage /></p>
         ) : (
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
             {products.map((product) => (
