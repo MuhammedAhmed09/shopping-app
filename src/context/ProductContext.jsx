@@ -1,46 +1,74 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 
-const ProductsContext = createContext([]);
+const ProductsContext = createContext(null);
 
 const ProductsProvider = ({ children }) => {
-    const [products, setProducts] = useState([]);
-    const [loadingInProducts, setLoadingInProducts] = useState(true);
-    const womenProducts = [
-        "womens-dresses",
-        "womens-jewellery",
-        "womens-watches",
-        'womens-shoes',
-        "womens-bags",
-    ];
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [sortOrder, setSortOrder] = useState('');
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState('all');
+  const [loading, setLoading] = useState(true);
 
-    const getWomenProducts = async () => {
-        try{
-            const response = await Promise.all(
-                womenProducts.map((product) => 
-                    axios.get(`https://dummyjson.com/products/category/${product}`)
-                )
-            );
-            const allProducts = response.flatMap((res) => res.data.products);
-            setProducts(allProducts)
+  const getProducts = async (selectedCategory = 'all') => {
+    try {
+      setLoading(true);
+      const url =
+        selectedCategory === 'all'
+          ? 'https://dummyjson.com/products'
+          : `https://dummyjson.com/products/category/${selectedCategory}`;
 
-        }catch (error) {
-            console.error('Error while fetching:', error.message);
-        } finally {
-            setLoadingInProducts(false);
-        }
+      const response = await axios.get(url);
+      setProducts(response.data.products || []);
+    } catch (error) {
+      console.error('Error while fetching products:', error.message);
+    } finally {
+      setLoading(false);
     }
+  };
 
-    useEffect(() => {
-        getWomenProducts();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+  const getCategories = async () => {
+    try {
+      const res = await axios.get('https://dummyjson.com/products/categories');
+      setCategories(res.data || []);
+    } catch (error) {
+      console.error('Error fetching categories:', error.message);
+    }
+  };
 
-    return (
-        <ProductsContext.Provider value={{ products, loadingInProducts }}>
-            { children }
-        </ProductsContext.Provider>
+  useEffect(() => {
+    getProducts(category);
+    getCategories();
+  }, [category]);
+
+  const sortedProducts = [...products]
+    .filter(product =>
+      product.title?.toLowerCase().includes(search.toLowerCase())
     )
-}
+    .sort((a, b) => {
+      if (sortOrder === 'asc') return a.title.localeCompare(b.title);
+      if (sortOrder === 'desc') return b.title.localeCompare(a.title);
+      if (sortOrder === 'priceLowHigh') return a.price - b.price;
+      if (sortOrder === 'priceHighLow') return b.price - a.price;
+      return 0;
+    });
+
+  return (
+    <ProductsContext.Provider
+      value={{
+        sortedProducts,
+        loading,
+        setSortOrder,
+        categories,
+        setSearch,
+        setCategory
+      }}
+    >
+      {children}
+    </ProductsContext.Provider>
+  );
+};
+
 export default ProductsProvider;
-export { ProductsContext }
+export { ProductsContext };

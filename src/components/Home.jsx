@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import lunaImage from '/image/luna.png'
 
@@ -8,34 +8,16 @@ import { ProductsContext } from '../context/ProductContext';
 //IMPORT SWIPER COMPONENTS
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import axios from 'axios';
 import LoaderPage from '../pages/LoaderPage';
 
 
 const Home = () => {
-  const { products, loadingInProducts } = useContext(ProductsContext);
-  const [categories, setCategories] = useState([]);
-  const [loadingOnCategories, setLoadingOnCategories] = useState(true);
-  
-  // MAKE BEST SELLING FUNCTION
-  const bestSelling = [...products]
+  const { sortedProducts, loading, categories } = useContext(ProductsContext);
+   
+  const bestSelling = [...sortedProducts]
   .sort(( a, b ) => a.stock - b.stock)
   .slice( 0, 6 );
 
-  const getWomenCategories = async () => {
-    try {
-      const res = await axios.get('https://dummyjson.com/products/categories');
-      setCategories(res.data);
-    } catch (error) {
-      console.error('Error fetching categories:', error.message);      
-    } finally {
-      setLoadingOnCategories(false);
-    }
-  };
-  
-  useEffect(() => {
-    getWomenCategories();
-  }, []);
 
   return (
     <div className='pt-[calc(14rem)]'>
@@ -59,7 +41,7 @@ const Home = () => {
           pagination={{ clickable: false }}
           navigation
         >
-          {loadingOnCategories ? (
+          {loading ? (
             <p><LoaderPage /></p>
           ) : (
             categories.map((cat, index) => (
@@ -69,7 +51,7 @@ const Home = () => {
                   className='h-[30vh] bg-black/50 w-full bg-cover bg-center rounded-xl flex text-center items-center justify-center text-white text-xl font-bold hover:scale-105 transition'                  
                 >
                   <div className=' px-4 py-2 rounded w-full'>
-                    {cat.name.replace(/-/g, ' ')}
+                    {cat.name}
                   </div>
                 </div>
               </Link>
@@ -102,7 +84,7 @@ const Home = () => {
           pagination={{ clickable: false }}
           navigation
         >
-          {loadingInProducts ? (
+          {loading ? (
             <p>Loading...</p>
           ) : (
             bestSelling.map((cat) => (
