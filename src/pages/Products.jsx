@@ -6,6 +6,7 @@ import ProductNav from '../components/ProductNav';
 
 const Products = () => {
  const { sortedProducts, loading } = useContext(ProductsContext);
+ 
   return (
     <section className='flex flex-col px-[10%] pt-[calc(14rem)]'>
       <ProductNav />

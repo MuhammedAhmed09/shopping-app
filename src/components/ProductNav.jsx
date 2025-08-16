@@ -1,8 +1,15 @@
-import React, { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { ProductsContext } from '../context/ProductContext';
+import Filter from './Filter';
 
 const ProductNav = () => {
     const { setSortOrder, setCategory, categories, sortedProducts } = useContext(ProductsContext);
+    const [filterBtn, setFilterBtn] = useState(false);
+
+    const handleFilterClick = () => {       
+        setFilterBtn(prev => !prev);
+    }
+    
   return (
     <div className='flex my-10 text-center justify-between'>
         <div className='flex-4/4 hidden md:flex'>
@@ -33,7 +40,11 @@ const ProductNav = () => {
                 </select>
             </div>
         </div>
-        <div className='text-primary/80 flex-1/4 text-end'>
+        <div className='flex md:hidden text-primary/80'>
+            <button onClick={handleFilterClick}>Filter</button>
+            {filterBtn && <Filter setFilterBtn={setFilterBtn} />}
+        </div>
+        <div className='text-primary/70 flex-1/4 text-end'>
             {sortedProducts.length+ [' ']}products
         </div>
     </div>
