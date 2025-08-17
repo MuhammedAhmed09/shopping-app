@@ -54,7 +54,7 @@ const MainNav = () => {
                     <li key={item.id}>
                         <Link
                             to={item.path}
-                            className={`transition-all duration-200 text-lg ${
+                            className={`transition-all duration-200 text-sm xl:text-lg ${
                                 item.path == location.pathname 
                                 ?'border-b-2 border-primary text-primary font-semibold'
                                 :'text-gray-600 hover:text-gray-900 hover:border-b border-primary-border'
@@ -97,7 +97,7 @@ const MainNav = () => {
 
         {/* MOBILE menu */}
         {isOpen && (
-            <ul className='absolute top-full left-0  w-full bg-primary text-white flex flex-col items-center gap-6 py-6 lg:hidden z-99'>
+            <ul className='absolute top-full left-0 w-full h-screen bg-primary/60 text-white flex flex-col items-center gap-12 py-12 lg:hidden z-99'>
                 {navItems.map((item) => (
                     <li key={item.id} >
                         <Link

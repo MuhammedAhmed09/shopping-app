@@ -1,37 +1,32 @@
-import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { CartContext } from '../context/CartPageContext';
 import { ToastContext } from '../context/TaosterContext';
-import LoaderPage from './LoaderPage';
+import LoaderPage from '../components/LoaderPage';
+import BestSelling from '../components/BestSelling';
+import { ProductsContext } from '../context/ProductContext';
 
 const ProductDetails = () => {
   const {id} = useParams();
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState(true);
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
 
   const { addToCart } = useContext(CartContext);
   const { addToCartToast } = useContext(ToastContext);
-
-  const getProductById = async () => {
-    try {
-      const res = await axios.get(`https://dummyjson.com/products/${id}`);
-      setProduct(res.data);
-
-    } catch (error) {
-      console.error('Some thing wrong at product details', error.message);
-    } finally {
-        setLoading(false);
-    } 
-  }
+  const { getProductById } = useContext(ProductsContext);
 
   useEffect(() => {
-    getProductById();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+    const fetchProduct = async () => {
+      const data = await getProductById(id);
+      setProduct(data);
+      setLoading(false);
+    }
+    
+    fetchProduct();
+  }, [id, getProductById]);
 
   const handleDecreaseClick = () => {
     setQuantity(quantity - 1)
@@ -43,7 +38,8 @@ const ProductDetails = () => {
   
 
   return (
-    <div className=' pt-[calc(14rem)]'>
+    <div className='pt-[calc(14rem)] mt-8'>
+      {/* PRODUCT DETAILS */}
       {loading ? (
         <p className='text-center'><LoaderPage /></p>
       ) : (
@@ -117,9 +113,10 @@ const ProductDetails = () => {
               <p className='text-black/50 font-semibold mt-8 text-xl'>{product.description}</p>
             </div>
           </div>
-
         )
       )}
+      {/* BEST SELLING */}
+      <BestSelling />
     </div>
   )
 }

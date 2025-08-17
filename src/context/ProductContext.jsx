@@ -37,6 +37,31 @@ const ProductsProvider = ({ children }) => {
     }
   };
 
+  const getProductById = async (id) => {
+    try {
+      const res = await axios.get(`https://dummyjson.com/products/${id}`);
+      return res.data;
+    } catch (error) {
+      console.error("Error fetching product by ID:", error.message);
+      return null;
+    }
+  };
+
+  const getProductsByCategory = async (selectedCategory) => {
+    try {
+      const url =
+      selectedCategory === 'all'
+        ? 'https://dummyjson.com/products'
+        : `https://dummyjson.com/products/category/${selectedCategory}`;
+
+      const response = await axios.get(url);
+      return response.data.products || [];
+    } catch(error) {
+      console.error('Some thing wrong at collection products', error.message);
+      return [];
+    }
+  }
+
   useEffect(() => {
     getProducts(category);
     getCategories();
@@ -62,7 +87,9 @@ const ProductsProvider = ({ children }) => {
         setSortOrder,
         categories,
         setSearch,
-        setCategory
+        setCategory,
+        getProductById,
+        getProductsByCategory
       }}
     >
       {children}

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ProductsContext } from '../context/ProductContext';
-import LoaderPage from './LoaderPage';
+import LoaderPage from '../components/LoaderPage';
 import ProductNav from '../components/ProductNav';
 
 const Products = () => {

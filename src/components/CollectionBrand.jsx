@@ -1,37 +1,28 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import LoaderPage from './LoaderPage';
+import LoaderPage from '../components/LoaderPage';
+import ProductNav from '../components/ProductNav';
+import { ProductsContext } from '../context/ProductContext';
 
 const CollectionBrand = () => {
     const { categoryName } = useParams();
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
 
-    const fetchProductsByCategory = async () => {
-        try {
-            const res = await axios.get(`https://dummyjson.com/products/category/${categoryName}`);
-            setProducts(res.data.products);
-            console.log(res.data.products);
-
-        } catch(error) {
-            console.error('Some thing wrong at collection products', error.message);
-        } finally {
-            setLoading(false);
-        }
-    }
+    const { getProductsByCategory } = useContext(ProductsContext)
 
     useEffect(() => {
-        fetchProductsByCategory();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [categoryName]);
+        const fetchByCategory = async () => {
+            const data = await getProductsByCategory(categoryName);
+            setProducts(data);
+            setLoading(false);
+        }
+
+        fetchByCategory()
+    }, [categoryName, getProductsByCategory]);
     
   return (
-    <section className='flex flex-col px-[10%] pt-[calc(14rem)]'>
-        <nav className='my-10'>
-            <h3 className='text-2xl font-semibold'>Availability & Price Sort (Coming Soon)</h3>
-        </nav>
-
+    <section className='flex flex-col px-[10%] my-8 pt-[calc(14rem)]'>
         <section>
         {loading ? (
             <p className='text-center'><LoaderPage /></p>

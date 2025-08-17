@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { CartContext } from '../context/CartPageContext'
-import QuantityControl from './QuantityControl';
+import QuantityControl from '../components/QuantityControl';
 
 const Cart = () => {
   const { cartItems } = useContext(CartContext);
@@ -15,7 +15,7 @@ const Cart = () => {
       {cartItems?.length > 0 ? (
         <>
           <div className='flex justify-between items-center'>
-            <h1 className='font-bold text-4xl md:text-5xl md:font-semibold lg:text-6xl my-6'>Your cart</h1>
+            <h1 className='font-bold text-2xl sm:text-3xl md:text-4xl md:font-semibold lg:text-5xl my-6'>Your cart</h1>
             <Link to='/products' className='hover:border-b border-primary-border text-lg font-semibold'>Continue shopping</Link>
           </div>
 
@@ -71,7 +71,7 @@ const Cart = () => {
         </>
       ) : (
         <div className='flex flex-col place-items-center gap-8'>
-          <h1 className=' text-6xl'>Your cart is empty</h1>
+          <h1 className='font-bold text-2xl sm:text-3xl md:text-4xl md:font-semibold lg:text-5xl'>Your cart is empty</h1>
           <Link to='/products' className=' bg-primary text-white font-semibold text-lg px-10 py-5 hover:scale-105 duration-300'>Continue shopping</Link>
         </div>
       )}

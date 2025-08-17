@@ -1,28 +1,37 @@
-import { createBrowserRouter, createRoutesFromElements, Outlet, Route, RouterProvider } from 'react-router-dom'
 import './App.css';
+import { 
+  createBrowserRouter,
+  createRoutesFromElements,
+  Outlet, 
+  Route, 
+  RouterProvider 
+} from 'react-router-dom'
+
+//CONTEXT
 import CategoriesProvider from './context/ProductContext';
+import CartProvider from './context/CartPageContext';
+import ToastProvider from './context/TaosterContext';
 
 //NAVBARS
 import FirstNav from './topNav/FirstNav';
 import MainNav from './topNav/MainNav';
 
 //COMPONENTS
-import Home from './components/Home';
-import About from './components/About';
-import ContactUs from './components/ContactUs';
+import CollectionBrand from './components/CollectionBrand';
 
 //PAGES
+import About from './pages/About';
 import Account from './pages/Account';
 import Cart from './pages/Cart';
-import Products from './pages/Products';
+import ContactUs from './pages/ContactUs';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
 import ProductDetails from './pages/ProductDetails';
-import CollectionBrand from './pages/CollectionBrand';
-import CartProvider from './context/CartPageContext';
-import ToastProvider from './context/TaosterContext';
+import Products from './pages/Products';
+
 
 //OTHER COMPONENTS
 import { Toaster } from 'react-hot-toast';
-import NotFound from './pages/NotFound';
 
 const Layout = () => {
   return (

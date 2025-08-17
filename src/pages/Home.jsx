@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import lunaImage from '/image/luna.png'
 
@@ -8,15 +8,12 @@ import { ProductsContext } from '../context/ProductContext';
 //IMPORT SWIPER COMPONENTS
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import LoaderPage from '../pages/LoaderPage';
+
+import LoaderPage from '../components/LoaderPage';
 
 
 const Home = () => {
-  const { sortedProducts, loading, categories } = useContext(ProductsContext);
-   
-  const bestSelling = [...sortedProducts]
-  .sort(( a, b ) => a.stock - b.stock)
-  .slice( 0, 6 );
+  const { loading, categories } = useContext(ProductsContext);
 
 
   return (
@@ -42,7 +39,7 @@ const Home = () => {
           navigation
         >
           {loading ? (
-            <p><LoaderPage /></p>
+            <LoaderPage />
           ) : (
             categories.map((cat, index) => (
             <SwiperSlide key={index}>
@@ -61,49 +58,6 @@ const Home = () => {
         </Swiper>
       </div>
 
-      {/* BEST SELLING */}
-      <div className='my-4 lg:px-10 md:px-8 sm:px-4'>
-      <h2 className='my-8 text-4xl font-bold'>Best Selling</h2>
-        <Swiper 
-          spaceBetween={3}
-          breakpoints={{
-            0: {
-              slidesPerView: 2
-            },
-            640: {
-              slidesPerView: 3
-            },
-            1024: {
-              slidesPerView: 5
-            },
-            2048: {
-              slidesPerView: 8
-            }
-          }}
-          autoplay={{ delay: 5000 }}
-          pagination={{ clickable: false }}
-          navigation
-        >
-          {loading ? (
-            <p>Loading...</p>
-          ) : (
-            bestSelling.map((cat) => (
-              <SwiperSlide key={cat.id} className='text-center'>
-                <Link
-                 to={`/product/${cat.id}`}
-                 
-                 >
-                  <img src={cat.images[0]} alt={cat.title} width={800} className='h-[40vh] duration-500 hover:scale-105' />
-                  <h2 className="text-lg font-bold">{cat.title}</h2>
-                  <p>Price: LE {Math.round(cat.price)}</p>
-                  <p className='text-primary absolute z-9 top-0 font-bold'> {cat.stock > 0 ? '' : 'Sold Out'}</p>
-                </Link>
-              </SwiperSlide>
-            )) 
-          )}
-          
-        </Swiper>
-      </div>
     </div>
   )
 }
