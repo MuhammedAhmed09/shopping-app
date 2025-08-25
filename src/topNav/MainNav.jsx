@@ -1,13 +1,15 @@
 import React, { useContext, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom';
 
-//ICONS
-import { CiShoppingCart, CiUser } from 'react-icons/ci';
-import { LiaBarsSolid } from 'react-icons/lia';
 import { CartContext } from '../context/CartPageContext';
+
+//ICONS
+import { CiShoppingCart, CiUser, CiSearch } from 'react-icons/ci';
+import { LiaBarsSolid } from 'react-icons/lia';
 
 const MainNav = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
     const location = useLocation();
     const { quantityInCart } = useContext(CartContext);
     
@@ -21,9 +23,7 @@ const MainNav = () => {
     const toggleMenu = () => {
         setIsOpen(prev => !prev);
     };
-      
-    const [isVisible, setIsVisible] = React.useState(true);
-    
+          
     React.useEffect(() => {
         const handleScroll = () => {
             // إذا نزلت تحت 50 بكسل، نخفيه
@@ -73,7 +73,7 @@ const MainNav = () => {
 
         <div className='text-3xl flex justify-end gap-6 w-1/3'>
             <Link 
-                to={'profile'} 
+                to={'profile'}
                 aria-label='Profile' 
                 className="transition-transform duration-500 transform hover:scale-105"
             >

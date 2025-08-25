@@ -1,10 +1,17 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const CartContext = createContext([]);
 
 const CartProvider = ({ children }) => {
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState(() => {
+        try {
+            return JSON.parse(localStorage.getItem("cartItems")) || [];
+        } catch (error) {
+            console.error("Failed to parse cart data:", error);
+            return [];
+        }
+    });
     
     const addToCart = (product) => {
         setCartItems((prevItems) => {
@@ -21,6 +28,10 @@ const CartProvider = ({ children }) => {
             }
         }) 
     };
+
+    useEffect(() => {
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }, [cartItems]);
 
     const increaseQuantity = (productId) => {
         setCartItems((prevItems) => 

@@ -87,6 +87,7 @@ const ProductsProvider = ({ children }) => {
         setSortOrder,
         categories,
         setSearch,
+        search,
         setCategory,
         getProductById,
         getProductsByCategory
