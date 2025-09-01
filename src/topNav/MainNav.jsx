@@ -73,8 +73,8 @@ const MainNav = () => {
 
         <div className='text-3xl flex justify-end gap-6 w-1/3'>
             <Link 
-                to={'profile'}
-                aria-label='Profile' 
+                to={'signin'}
+                aria-label='Signin' 
                 className="transition-transform duration-500 transform hover:scale-105"
             >
                 <i>

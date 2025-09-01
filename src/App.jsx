@@ -21,7 +21,6 @@ import CollectionBrand from './components/CollectionBrand';
 
 //PAGES
 import About from './pages/About';
-import Account from './pages/Account';
 import Cart from './pages/Cart';
 import ContactUs from './pages/ContactUs';
 import Home from './pages/Home';
@@ -32,6 +31,9 @@ import Products from './pages/Products';
 
 //OTHER COMPONENTS
 import { Toaster } from 'react-hot-toast';
+import SignIn from './authentication/SignIn';
+import SignUp from './authentication/SignUp';
+import ForgotPass from './authentication/ForgotPass';
 
 const Layout = () => {
   return (
@@ -57,7 +59,9 @@ function App() {
           <Route path='product/:id' element={<ProductDetails />} />
           <Route path='collections/:categoryName' element={<CollectionBrand />} />
         </Route>
-        <Route path='profile' element={<Account />} />
+        <Route path='signin' element={<SignIn />} />
+        <Route path='forgotpassword' element={<ForgotPass />} />
+        <Route path='signup' element={<SignUp />} />
         <Route path='*' element={<NotFound />} />
       </Route>
     )
