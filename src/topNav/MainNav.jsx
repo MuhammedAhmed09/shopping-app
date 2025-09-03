@@ -6,6 +6,7 @@ import { CartContext } from '../context/CartPageContext';
 //ICONS
 import { CiShoppingCart, CiUser, CiSearch } from 'react-icons/ci';
 import { LiaBarsSolid } from 'react-icons/lia';
+import AuthStatus from '../pages/AuthStatus';
 
 const MainNav = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -72,15 +73,7 @@ const MainNav = () => {
         </div>
 
         <div className='text-3xl flex justify-end gap-6 w-1/3'>
-            <Link 
-                to={'signin'}
-                aria-label='Signin' 
-                className="transition-transform duration-500 transform hover:scale-105"
-            >
-                <i>
-                    <CiUser />
-                </i>
-            </Link>
+            <AuthStatus/>
             <Link 
                 to={'cart'} 
                 aria-label='Cart' 

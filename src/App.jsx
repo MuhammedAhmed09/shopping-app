@@ -34,6 +34,7 @@ import { Toaster } from 'react-hot-toast';
 import SignIn from './authentication/SignIn';
 import SignUp from './authentication/SignUp';
 import ForgotPass from './authentication/ForgotPass';
+import UserProvider from './context/UserContext';
 
 const Layout = () => {
   return (
@@ -71,8 +72,10 @@ function App() {
     <CartProvider>
       <CategoriesProvider>
         <ToastProvider>
-          <Toaster position="top-right" reverseOrder={false} />
-          <RouterProvider router={router} />
+          <UserProvider>
+            <Toaster position="top-right" reverseOrder={false} />
+            <RouterProvider router={router} />
+          </UserProvider>
         </ToastProvider>
       </CategoriesProvider>
     </CartProvider>
