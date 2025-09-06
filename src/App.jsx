@@ -11,6 +11,7 @@ import {
 import CategoriesProvider from './context/ProductContext';
 import CartProvider from './context/CartPageContext';
 import ToastProvider from './context/TaosterContext';
+import UserProvider from './context/UserContext';
 
 //NAVBARS
 import FirstNav from './topNav/FirstNav';
@@ -27,14 +28,15 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import ProductDetails from './pages/ProductDetails';
 import Products from './pages/Products';
+import Checkout from './pages/Checkout';
 
-
-//OTHER COMPONENTS
-import { Toaster } from 'react-hot-toast';
+//AUTHENTICATION
 import SignIn from './authentication/SignIn';
 import SignUp from './authentication/SignUp';
 import ForgotPass from './authentication/ForgotPass';
-import UserProvider from './context/UserContext';
+
+//OTHER COMPONENTS
+import { Toaster } from 'react-hot-toast';
 
 const Layout = () => {
   return (
@@ -60,6 +62,7 @@ function App() {
           <Route path='product/:id' element={<ProductDetails />} />
           <Route path='collections/:categoryName' element={<CollectionBrand />} />
         </Route>
+        <Route path='checkout' element={<Checkout />} />
         <Route path='signin' element={<SignIn />} />
         <Route path='forgotpassword' element={<ForgotPass />} />
         <Route path='signup' element={<SignUp />} />

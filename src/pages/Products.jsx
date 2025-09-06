@@ -25,6 +25,7 @@ const Products = () => {
                  src={product.images[0]}
                  alt={product.title}
                  className='h-[40vh] w-full object-cover rounded mb-2 transition-transform duration-800 hover:scale-105' 
+                 loading="lazy"
                 />
                 <h2 className="text-lg font-bold">{product.title}</h2>
                 <p>Price: ${Math.round(product.price)}</p>

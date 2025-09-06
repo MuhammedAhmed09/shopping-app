@@ -26,6 +26,7 @@ export default function About() {
           src="/image/womenPantslifestyle.jpg"
           alt="Lifestyle"
           className="rounded-2xl shadow-md"
+          loading="lazy"
         />
       </section>
 

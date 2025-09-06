@@ -6,12 +6,12 @@ import { PiUserCircleLight } from "react-icons/pi";
 import SignOut from "../authentication/SignOut";
 
 const AuthStatus = () => {
-    const [userInfo, setUserInfo] = useState(false);
-    const { user } = useContext( UserContext );
+  const [userInfo, setUserInfo] = useState(false);
+  const { user } = useContext( UserContext );
 
-    const handleUserInfo = () => {
-        setUserInfo(prev => !prev);
-    };
+  const handleUserInfo = () => {
+      setUserInfo(prev => !prev);
+  };
 
   return (
     <>

@@ -38,6 +38,7 @@ const CollectionBrand = () => {
                         src={product.thumbnail} 
                         alt={product.title} 
                         className='h-[40vh] w-full object-cover rounded mb-2 hover:scale-105 duration-300' 
+                        loading="lazy"
                     />
                     <h2 className="text-lg font-bold">{product.title}</h2>
                     <p>Price: LE {Math.round(product.price)}</p>

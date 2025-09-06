@@ -45,10 +45,18 @@ const BestSelling = () => {
                     <Link
                     to={`/product/${cat.id}`}
                     >
-                        <img src={cat.images[0]} alt={cat.title} width={800} className='h-[40vh] duration-500 hover:scale-105' />
+                        <img
+                            src={cat.images[0]} 
+                            alt={cat.title} 
+                            width={800} 
+                            className='h-[40vh] duration-500 hover:scale-105'
+                            loading="lazy"
+                        />
                         <h2 className="text-lg font-bold">{cat.title}</h2>
                         <p>Price: LE {Math.round(cat.price)}</p>
-                        <p className='text-primary absolute z-9 top-0 font-bold'> {cat.stock > 0 ? '' : 'Sold Out'}</p>
+                        <p className='text-primary absolute z-9 top-0 font-bold'> 
+                            {cat.stock > 0 ? '' : 'Sold Out'}
+                        </p>
                     </Link>
                 </SwiperSlide>
                 )) 
