@@ -10,9 +10,9 @@ const QuantityControl = ({ item }) => {
 
   return (
     <div className='flex items-center gap-4'>
-        <div className='border w-40 h-14 my-2 flex flex-row overflow-hidden '>
+        <div className='flex border h-12 w-fit my-2 overflow-hidden'>
             <button 
-                className='w-2/3 justify-items-center disabled:text-black/40 disabled:cursor-default cursor-pointer'
+                className='w-12 h-full flex items-center justify-center disabled:text-black/40 cursor-pointer disabled:cursor-default'
                 onClick={() => decreaseQuantity(item.id)}
             >
                 <FaMinus />
@@ -22,10 +22,10 @@ const QuantityControl = ({ item }) => {
                 min="1"
                 value={item.quantity}
                 onChange={(e) => {updateQuantity(item.id, parseInt(e.target.value))}}
-                className='text-center items-center w-full'
+                className='text-center w-16 h-full outline-none appearance-none'
             />
             <button
-                className='w-2/3 justify-items-center cursor-pointer'
+                className='w-12 h-full flex items-center justify-center cursor-pointer'
                 onClick={() => increaseQuantity(item.id)}
             >
                 <FaPlus />
