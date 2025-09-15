@@ -3,13 +3,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCE1jD-Ah8CrkFwESk1KzuGcC0dlKURZ1A",
-  authDomain: "luna-app-98f57.firebaseapp.com",
-  projectId: "luna-app-98f57",
-  storageBucket: "luna-app-98f57.firebasestorage.app",
-  messagingSenderId: "126340970772",
-  appId: "1:126340970772:web:a195900f2a68c0dd4b6a01",
-  measurementId: "G-B6624EMWTQ"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
