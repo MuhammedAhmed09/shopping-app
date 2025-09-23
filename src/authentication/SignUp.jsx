@@ -3,12 +3,15 @@ import { auth } from '../firebase';
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import { ToastContext } from "../context/TaosterContext";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isHiddenPassword, setIsHiddenPassword] = useState(true);
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isHiddenConfirmPassword, setIsHiddenConfirmPassword] = useState(true);
   const navigate = useNavigate();
   const { signUpToast } = useContext(ToastContext);
 
@@ -28,7 +31,15 @@ const SignUp = () => {
       alert(error.message);
     }
   };
-  
+
+  const handlePasswordType = () => {
+    setIsHiddenPassword(prev => !prev)
+  }
+
+  const handleConfirmPasswordType = () => {
+    setIsHiddenConfirmPassword(prev => !prev)
+  }
+
   return (
     <div className='bg-gray-100 w-full h-[100vh] items-center flex justify-center '>
       <div className='bg-white p-12 flex flex-col rounded-2xl shadow-xl min-w-sm'>
@@ -46,22 +57,38 @@ const SignUp = () => {
             className='border placeholder:text-primary/30 border-gray-200 rounded-lg p-3 focus:outline-2 outline-sky-700 transition duration-300'
             required
           />
-          <input 
-            type="password"
-            placeholder='Password'
-            value={password}
-            onChange={(e)=> {setPassword(e.target.value)}}
-            className='border placeholder:text-primary/30 border-gray-200 rounded-lg p-3 focus:outline-2 outline-sky-700 transition duration-300'
-            required
-          />
-          <input 
-            type="password" 
-            placeholder='Confirm Password' 
-            value={confirmPassword}
-            onChange={(e)=> {setConfirmPassword(e.target.value)}}
-            className='border placeholder:text-primary/30 border-gray-200 rounded-lg p-3 focus:outline-2 outline-sky-700 transition duration-300'
-            required
-          />
+          <div className="flex items-center relative">
+            <input 
+              type={isHiddenPassword ? 'password' : 'text'}
+              placeholder='Password' 
+              value={password}
+              onChange={(e)=> {setPassword(e.target.value)}}
+              className='border w-full placeholder:text-primary/30 border-gray-200 rounded-lg p-3 focus:outline-2 outline-sky-700 transition duration-300'
+              required
+            />
+            <p 
+              className="absolute right-4 cursor-pointer"
+              onClick={handlePasswordType}
+            >
+              {!isHiddenPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+            </p>
+          </div>
+          <div className="flex items-center relative">
+            <input 
+              type={isHiddenConfirmPassword ? 'password' : 'text'}
+              placeholder='Confirm Password' 
+              value={confirmPassword}
+              onChange={(e)=> {setConfirmPassword(e.target.value)}}
+              className='border w-full placeholder:text-primary/30 border-gray-200 rounded-lg p-3 focus:outline-2 outline-sky-700 transition duration-300'
+              required
+            />
+            <p 
+              className="absolute right-4 cursor-pointer"
+              onClick={handleConfirmPasswordType}
+            >
+              {!isHiddenConfirmPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+            </p>
+          </div>
           <button
             type="submit"
             className='rounded-lg p-3 text-white font-semibold bg-sky-700 hover:bg-sky-800 transition duration-300 cursor-pointer'

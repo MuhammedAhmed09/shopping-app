@@ -3,11 +3,13 @@ import { Link, useNavigate } from "react-router-dom"
 import { auth } from "../firebase";
 import { useContext, useState } from "react";
 import { ToastContext } from "../context/TaosterContext";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 
 const SignIn = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isHiddenPassword, setIsHiddenPassword] = useState(true);
     const navigate = useNavigate();
     const { signInToast } = useContext(ToastContext)
   
@@ -22,6 +24,10 @@ const SignIn = () => {
         alert(error.message);
       }
     };
+
+    const handlePasswordType = () => {
+      setIsHiddenPassword(prev => !prev)
+    }
 
   return (
     <div className='bg-gray-100 w-full h-[100vh] items-center flex justify-center '>
@@ -41,14 +47,22 @@ const SignIn = () => {
             className='border placeholder:text-primary/30 border-gray-200 rounded-lg p-3 focus:outline-2 outline-sky-700 transition duration-300'
             required
           />
-          <input 
-            type="password" 
-            placeholder='Password' 
-            value={password}
-            onChange={(e)=> {setPassword(e.target.value)}}
-            className='border placeholder:text-primary/30 border-gray-200 rounded-lg p-3 focus:outline-2 outline-sky-700 transition duration-300'
-            required
-          />
+          <div className="flex items-center relative">
+            <input 
+              type={isHiddenPassword ? 'password' : 'text'}
+              placeholder='Password' 
+              value={password}
+              onChange={(e)=> {setPassword(e.target.value)}}
+              className='border w-full placeholder:text-primary/30 border-gray-200 rounded-lg p-3 focus:outline-2 outline-sky-700 transition duration-300'
+              required
+            />
+            <p 
+              className="absolute right-4 cursor-pointer"
+              onClick={handlePasswordType}
+            >
+              {!isHiddenPassword ? <FaRegEyeSlash /> : <FaRegEye />}
+            </p>
+          </div>
           <Link to='/forgotpassword' className="text-end text-sm text-primary/90 hover:scale-105 duration-300">Forgot Password?</Link>
           <button
             type="submit"
