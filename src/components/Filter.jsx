@@ -6,12 +6,20 @@ const Filter = ({ setFilterBtn }) => {
   const { sortedProducts, setSortOrder, setCategory, categories } = React.useContext(ProductsContext);
 
   return (
-    <div className='fixed flex flex-col justify-between z-99 bg-white sm:w-[70%] w-[80%] h-screen top-0 right-0'>
-      <div className='border-primary/10 border-b py-4'>
-        <h3 className='font-bold text-xl'>Sort and Categories</h3>
-        <h4 className='font-semibold text-primary/60'>{sortedProducts.length+ [' ']}products</h4>
+    <div className='fixed flex flex-col gap-8 z-99 bg-white sm:w-[70%] w-[80%] h-screen top-0 right-0'>
+      <div className='border-primary/10 border-b flex justify-between p-4'>
+        <div>
+          <h3 className='font-bold text-xl'>Sort and Categories</h3>
+          <h4 className='font-semibold text-primary/60'>{sortedProducts.length+ [' ']}products</h4>
+        </div>
+        <button 
+          onClick={() => setFilterBtn(false)} 
+          className='text-3xl duration-500 hover:scale-105'
+        >
+          <IoClose />
+        </button>
       </div>
-      <div className='flex flex-col px-4 -translate-y-42 gap-8'>
+      <div className='flex flex-col px-4 gap-8'>
         <div className='flex justify-between'>
             <h3 className='text-primary/80'>Sort by:</h3>
             <select 
@@ -38,9 +46,6 @@ const Filter = ({ setFilterBtn }) => {
                 ))}
             </select>
         </div>
-      </div>
-      <div className='border-primary/10 border-t py-4'>
-        <button onClick={() => setFilterBtn(false)} className='text-3xl duration-500 hover:scale-105'><IoClose /></button>
       </div>
     </div>
   )

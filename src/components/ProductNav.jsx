@@ -4,33 +4,29 @@ import Filter from './Filter';
 import { CiSearch } from 'react-icons/ci';
 import SearchBtn from './SearchBtn';
 
-const ProductNav = () => {
+const ProductNav = ({ handleFilterClick, filterBtn, setFilterBtn }) => {
     const { setSortOrder, setCategory, categories, sortedProducts } = useContext(ProductsContext);
-    const [filterBtn, setFilterBtn] = useState(false);
     const [search, setSearch] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
 
-    const handleFilterClick = () => {       
-        setFilterBtn(prev => !prev);
-    }
 
     const handleSearchBtn = () => {
         setSearch(prev => !prev);
     }
 
     useEffect(() => {
-            const handleScroll = () => {
-                // إذا نزلت تحت 50 بكسل، نخفيه
-                if (window.scrollY > 50) {
-                setIsVisible(false);
-                } else {
-                setIsVisible(true);
-                }
-            };
-    
-            window.addEventListener('scroll', handleScroll);
-            return () => window.removeEventListener('scroll', handleScroll);
-        }, []);
+        const handleScroll = () => {
+            // إذا نزلت تحت 50 بكسل، نخفيه
+            if (window.scrollY > 50) {
+            setIsVisible(false);
+            } else {
+            setIsVisible(true);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
     
   return (
     <div className='flex my-10 text-center justify-between'>

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ProductsContext } from '../context/ProductContext';
 import LoaderPage from '../components/LoaderPage';
@@ -6,10 +6,40 @@ import ProductNav from '../components/ProductNav';
 
 const Products = () => {
  const { sortedProducts, loading } = useContext(ProductsContext);
+  const [filterBtn, setFilterBtn] = useState(false);
+
+  const filterRef = useRef(null);
+
+  // close on outside click
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (filterRef.current && !filterRef.current.contains(event.target)) {
+        setFilterBtn(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleFilterClick = () => {
+    setFilterBtn(prev => !prev);
+  }
  
   return (
     <section className='flex flex-col px-[10%] pt-[calc(14rem)]'>
-      <ProductNav />
+
+      <div ref={filterRef}>
+        <ProductNav 
+          handleFilterClick={handleFilterClick} 
+          filterBtn={filterBtn} 
+          setFilterBtn={setFilterBtn} 
+        />
+      </div>
+      
       <section>
         {loading ? (
           <p className='text-center'><LoaderPage /></p>
