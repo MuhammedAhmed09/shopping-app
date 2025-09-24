@@ -18,16 +18,16 @@ const Filter = ({ setFilterBtn }) => {
   }, [setFilterBtn]);
 
   return (
-    <div className="fixed inset-0 z-99 bg-black/50 flex justify-center items-center right-0">
-      <div className="bg-white w-[80%] max-w-sm shadow-lg p-6 relative h-screen right-0" ref={filterRef}>
-        <div className='flex justify-between p-4'>
+    <div className="fixed inset-0 z-99 bg-black/50 flex justify-center items-center ">
+      <div className="bg-white w-[80%] max-w-sm shadow-lg p-6 h-screen absolute right-0 top-0" ref={filterRef}>
+        <div className='flex justify-between p-4 border-b mb-6 border-primary/50'>
           <div>
             <h3 className='font-bold text-xl'>Sort and Categories</h3>
             <h4 className='font-semibold text-primary/60'>{sortedProducts.length+ [' ']}products</h4>
           </div>
           <button 
             onClick={() => setFilterBtn(false)} 
-            className='text-3xl duration-500 hover:scale-105'
+            className='text-3xl duration-500 hover:scale-105 cursor-pointer'
           >
             <IoClose />
           </button>
