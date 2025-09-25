@@ -4,6 +4,7 @@ import { CiUser } from "react-icons/ci";
 import { UserContext } from "../context/UserContext"
 import { PiUserCircleLight } from "react-icons/pi";
 import SignOut from "../authentication/SignOut";
+import UserInfo from "../components/UserInfo";
 
 const AuthStatus = () => {
   const [userInfo, setUserInfo] = useState(false);
@@ -36,12 +37,13 @@ const AuthStatus = () => {
         </Link>
       )}
     </div>
-    {userInfo && user &&  (
-    <div className="absolute mt-9 mr-20 w-48 bg-white rounded-xl shadow-lg p-4">
-        <p className="text-sm text-gray-700 mb-2">Welcome, {user.email}</p>
-        <SignOut />
+    <div className="relative">
+    {userInfo && user && 
+      <div className="absolute bg-white border rounded-lg border-primary/10 shadow p-1 top-10 text-sm w-64 right-4">
+          <UserInfo />
+      </div>
+    }
     </div>
-    )}
     </>
   );
 };

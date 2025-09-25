@@ -12,14 +12,14 @@ const SignOut = () => {
       signOutToast();
 
     } catch (error) {
-      error(error.massege);
+      console.error(error.massege);
     }
   };
 
   return <button 
-    type="submit" 
+    type="button" 
     onClick={handleSignOut}
-    className="cursor-pointer text-red-600 text-2xl border border-red-500 w-full px-1 py-3"
+     className="absolute cursor-pointer p-2 mt-1 right-0 w-24 text-center bg-white border border-gray-200 text-primary/70 font-semibold rounded-lg shadow-md z-10"
   >
     Sign Out
   </button>;

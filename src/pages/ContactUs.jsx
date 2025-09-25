@@ -17,23 +17,23 @@ const ContactUs = () => {
           <input
             type="text"
             placeholder='Name'
-            className='border w-full p-3 hover:border-gray-400 hover:border-2 placeholder:text-lg'
+            className='ring w-full p-3 ring-gray-400 hover:ring-2 placeholder:text-lg'
           />
           <input 
             type="email" 
             placeholder='Email *' 
-            className='border w-full p-3 hover:border-gray-400 hover:border-2 placeholder:text-lg'
+            className='ring w-full p-3 ring-gray-400 hover:ring-2 placeholder:text-lg'
           />
         </div>
         <div>
           <input 
             type="number" 
             placeholder='Phone number' 
-            className='border w-full p-3 hover:border-gray-400 hover:border-2 placeholder:text-lg'
+            className='ring w-full p-3 ring-gray-400 hover:ring-2 placeholder:text-lg'
           />
         </div>
         <div>
-          <textarea name="comment" placeholder='Comment' className='border w-full p-3 hover:border-gray-400 transform hover:border-2 '/>
+          <textarea name="comment" placeholder='Comment' className='ring w-full p-3 ring-gray-400 transform hover:ring-2 '/>
         </div>
 
         <button type='submit' className='self-start bg-black text-white text-lg px-12 py-3 transition-transform duration-500 transform hover:scale-105 cursor-pointer'>Send</button>

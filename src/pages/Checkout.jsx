@@ -1,17 +1,21 @@
 import { useContext } from 'react';
 import OrderSummary from '../components/OrderSummary'
 import { UserContext } from '../context/UserContext';
-import { Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import UserInfo from '../components/UserInfo';
 
 const Checkout = () => {
     const { user } = useContext( UserContext );
 
-  return (    
-    user ? 
-    (<div className="mx-auto px-4 py-10 grid gap-8">
+  return (
+    <div className="mx-auto px-4 py-10 grid gap-8">
         <div className="bg-gray-50 rounded-2xl shadow p-6">
-            <h2 className="text-xl font-bold mb-4">Shipping Information</h2>
-            <form className="flex flex-col gap-4">
+            <div className='flex justify-between items-center'>
+                <h2 className="text-xl font-bold mb-4">Shipping Information</h2>
+                {!user && <Link to='/signin' className='text-primary/90 hover:scale-105 duration-300 hover:border-b w-fit text-sm'>log-In</Link>}
+            </div>
+            <form className="flex flex-col gap-4">                
+                {!user ? <input type="email" placeholder="Email" className="border-b py-2 outline-0" /> : <UserInfo />}
                 <input type="text" placeholder="Full Name" className="border rounded-lg p-3" />
                 <input type="text" placeholder="Address" className="border rounded-lg p-3" />
                 <input type="text" placeholder="City" className="border rounded-lg p-3" />
@@ -29,9 +33,6 @@ const Checkout = () => {
             <OrderSummary />
         </div>
     </div>
-    ) : (
-        <Navigate to='/signin' />
-    )
 )
 }
 
