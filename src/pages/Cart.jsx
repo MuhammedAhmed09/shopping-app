@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { CartContext } from '../context/CartPageContext'
-import QuantityControl from '../components/QuantityControl';
 import OrderSummary from '../components/OrderSummary';
 
 const Cart = () => {

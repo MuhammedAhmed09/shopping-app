@@ -1,6 +1,11 @@
-
-
 const ContactUs = () => {
+
+  const inputsData = [
+    {type: 'text', placeHolder: 'Name'},
+    {type: 'email', placeHolder: 'Email *'},
+    {type: 'number', placeHolder: 'Phone Number'},
+  ]
+
   return (
     <div className='w-full flex flex-col my-10 px-5 md:px-22 lg:px-[20%] pt-[calc(14rem)]'>
       <div className='items-center text-center'>
@@ -13,25 +18,16 @@ const ContactUs = () => {
       </div>
 
       <form className='flex flex-col gap-6 mt-10'>
-        <div className='flex flex-col md:flex-row justify-between gap-6'>
-          <input
-            type="text"
-            placeholder='Name'
-            className='ring w-full p-3 ring-gray-400 hover:ring-2 placeholder:text-lg'
-          />
-          <input 
-            type="email" 
-            placeholder='Email *' 
-            className='ring w-full p-3 ring-gray-400 hover:ring-2 placeholder:text-lg'
-          />
-        </div>
-        <div>
-          <input 
-            type="number" 
-            placeholder='Phone number' 
-            className='ring w-full p-3 ring-gray-400 hover:ring-2 placeholder:text-lg'
-          />
-        </div>
+        {inputsData.map((input, index) => (
+          <div key={index} className='flex flex-col md:flex-row justify-between gap-6'>
+            <input
+              type={input.type}
+              placeholder={input.placeHolder}
+              className='ring w-full p-3 ring-gray-400 hover:ring-2 placeholder:text-lg'
+            />
+          </div>
+        ))}
+        
         <div>
           <textarea name="comment" placeholder='Comment' className='ring w-full p-3 ring-gray-400 transform hover:ring-2 '/>
         </div>

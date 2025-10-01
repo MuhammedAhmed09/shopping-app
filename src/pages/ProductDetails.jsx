@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { FaMinus, FaPlus } from 'react-icons/fa';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { CartContext } from '../context/CartPageContext';
 import { ToastContext } from '../context/TaosterContext';
@@ -76,7 +76,13 @@ const ProductDetails = () => {
               <div className='my-4'>
                 <p className='text-black/80'>Quantity</p>
                 <div className='flex border h-12 w-fit my-2 overflow-hidden'>
-                  <button className='w-12 h-full flex items-center justify-center disabled:text-black/40 cursor-pointer disabled:cursor-default' onClick={handleDecreaseClick} disabled={quantity <= 1}><FaMinus /></button>
+                  <button 
+                  className='w-12 h-full flex items-center justify-center disabled:text-black/40 cursor-pointer disabled:cursor-default' 
+                  onClick={handleDecreaseClick} 
+                  disabled={quantity <= 1}
+                  >
+                    <FaMinus />
+                  </button>
                   <input 
                     type="number" 
                     min="1"
@@ -84,7 +90,12 @@ const ProductDetails = () => {
                     onChange={(e) => setQuantity(e.target.value)}
                     className='text-center w-16 h-full outline-none appearance-none'
                   />
-                  <button className='w-12 h-full flex items-center justify-center cursor-pointer' onClick={handleIncreaseClick}><FaPlus /></button>
+                  <button 
+                  className='w-12 h-full flex items-center justify-center cursor-pointer' 
+                  onClick={handleIncreaseClick}
+                  >
+                    <FaPlus />
+                  </button>
                 </div>
               </div>
               <div className='felx flex-col lg:flex-row'>
@@ -106,7 +117,17 @@ const ProductDetails = () => {
                 )}
                 </div>
                 <div>
-                  {product.stock >= 1 && (<button className='items-center justify-center border min-w-40 w-full max-w-96 h-14 my-2 flex flex-row overflow-hidden cursor-pointer'>But it now</button>)}
+                  {product.stock >= 1 && (
+                    <Link
+                    to='/checkout'
+                    >
+                      <button 
+                      className='items-center justify-center border min-w-40 w-full max-w-96 h-14 my-2 flex flex-row overflow-hidden cursor-pointer'
+                      >
+                        But it now
+                      </button>
+                    </Link>
+                  )}
                 </div>
               </div>
 

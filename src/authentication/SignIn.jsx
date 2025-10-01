@@ -10,6 +10,7 @@ const SignIn = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isHiddenPassword, setIsHiddenPassword] = useState(true);
+    const [errorMessage, setErrorMessage] = useState('')
     const navigate = useNavigate();
     const { signInToast } = useContext(ToastContext)
   
@@ -20,8 +21,27 @@ const SignIn = () => {
         await signInWithEmailAndPassword(auth, email, password);
         navigate('/');
         signInToast();
-      }catch(error){
-        alert(error.message);
+      }catch (error) {
+        switch (error.code) {
+          case "auth/invalid-email":
+            setErrorMessage("The email address is not valid.");
+            break;
+          case "auth/user-disabled":
+            setErrorMessage("This account has been disabled.");
+            break;
+          case "auth/user-not-found":
+            setErrorMessage("No account found with this email.");
+            break;
+          case "auth/wrong-password":
+            setErrorMessage("Wrong password. Please try again.");
+            break;
+          case "auth/network-request-failed":
+            setErrorMessage("Network error. Please check your internet connection.");
+            break;
+          default:
+            setErrorMessage("Something went wrong. Please try again later.");
+            break;
+        }
       }
     };
 
@@ -71,6 +91,10 @@ const SignIn = () => {
             SIGN IN
           </button>
         </form>
+
+        {errorMessage && (
+          <p className="text-red-600 text-sm mt-2 text-center">{errorMessage}</p>
+        )}
 
         <div className="text-sm mt-5 text-primary/70 flex gap-2">
           <p>Don't have an account?</p>
